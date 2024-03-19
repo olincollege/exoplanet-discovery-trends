@@ -9,7 +9,6 @@ oec = ET.parse(gzip.GzipFile(fileobj=io.BytesIO(urllib.request.urlopen(url).read
 
 planet_dict = {}
 time_planet_dict = {}
-i = 0
 for system in oec.findall(".//system"):
     distance = system.findtext("distance")
     for planet in system.findall(".//planet"):

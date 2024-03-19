@@ -12,6 +12,7 @@ for i, discovery_type in enumerate(planet_dict):
         color=colors[i],
     )
 plt.legend(planet_dict.keys())
+plt.title("Exoplanet Distance vs. Discovery Year and Discovery Method")
 plt.xlabel("Discovery Year")
-plt.ylabel("Distance from Sun (parsecs)")
+plt.ylabel("Distance from Earth (parsecs)")
 plt.show()
