@@ -1,21 +1,25 @@
-from disc_year_data import discovery_year_list
+from bartest import discovery_year_dict
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_disc_year_histogram(start_year, end_year):
+def plot_disc_year_bars(start_year, end_year):
 
-    plt.hist(
-        [
-            year
-            for year in discovery_year_list
-            if (year >= start_year) & (year <= end_year)
-        ],
-        bins=30,
-        edgecolor="black",
+    limit_discovery_year_dict = {
+        year: value
+        for year, value in discovery_year_dict.items()
+        if (year >= start_year) & (year <= end_year)
+    }
+
+    years = list(limit_discovery_year_dict.keys())
+    values = list(limit_discovery_year_dict.values())
+
+    plt.bar(
+        years,
+        values,
     )
-    plt.autoscale(axis="y")
+    plt.locator_params(axis="both", integer=True, tight=True)
+    plt.xticks(rotation=45)
     plt.title("Number of Exoplanet Discoveries Over the Years")
     plt.xlabel("Year")
     plt.ylabel("Number of Exoplanets Discovered")
-    plt.show()
