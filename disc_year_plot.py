@@ -1,6 +1,5 @@
 from bartest import discovery_year_dict
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 def plot_disc_year_bars(start_year, end_year):
@@ -19,7 +18,6 @@ def plot_disc_year_bars(start_year, end_year):
         values,
     )
     plt.locator_params(axis="both", integer=True, tight=True)
-    plt.xticks(rotation=45)
     plt.title("Number of Exoplanet Discoveries Over the Years")
     plt.xlabel("Year")
     plt.ylabel("Number of Exoplanets Discovered")
