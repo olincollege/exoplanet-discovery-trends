@@ -1,8 +1,18 @@
-from bartest import discovery_year_dict
+from disc_year_data import discovery_year_dict
 import matplotlib.pyplot as plt
 
 
 def plot_disc_year_bars(start_year, end_year):
+    """
+    Creates a bar graph of the year vs the number of discovered exoplanets
+
+    The x-axis represent the discovery year and the y-axis represents the
+    number of planets discovered in each year.
+
+    Args:
+        start_year: an integer representing the year the graph starts at
+        end_year: an integer representing the year the graph ends at
+    """
 
     limit_discovery_year_dict = {
         year: value
