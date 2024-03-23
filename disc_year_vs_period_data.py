@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import urllib.request
 import gzip
 import io
+import pandas as pd
 
 url = "https://github.com/OpenExoplanetCatalogue/oec_gzip/raw/master/systems.xml.gz"
 oec = ET.parse(gzip.GzipFile(fileobj=io.BytesIO(urllib.request.urlopen(url).read())))
@@ -19,3 +20,5 @@ for system in oec.findall(".//system"):
             planet_dict["name"].append(name)
             planet_dict["period"].append(float(period))
             planet_dict["discovery_year"].append(int(discovery_year))
+
+planet_panda = pd.DataFrame.from_dict(planet_dict)
