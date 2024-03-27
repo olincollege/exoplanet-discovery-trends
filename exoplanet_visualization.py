@@ -115,5 +115,5 @@ def plot_disc_year_vs_period(start_year=1992, end_year=2024):
     )
     plt.title("Exoplanet Orbital Period vs. Discovery Year")
     plt.xlabel("Discovery Year")
-    plt.ylabel("Orbital Period")
+    plt.ylabel("Orbital Period (days)")
     plt.show()
