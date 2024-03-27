@@ -1,13 +1,15 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 from exoplanet_data_generation import (
     discovery_year_dict,
     planet_distance_dict,
     planet_year_dict,
     planet_panda,
 )
-import matplotlib.pyplot as plt
 
 
-def plot_disc_year_bars(start_year, end_year):
+def plot_disc_year_bars(start_year=1992, end_year=2024):
     """
     Creates a bar graph of the year vs the number of discovered exoplanets
 
@@ -38,7 +40,7 @@ def plot_disc_year_bars(start_year, end_year):
     plt.ylabel("Number of Exoplanets Discovered")
 
 
-def plot_disc_method_color(start_year, end_year):
+def plot_disc_method_color(start_year=1992, end_year=2024):
     """
     Creates a scatter plot of the distance of discovered exoplanets over time
     given a start and end year.
@@ -53,6 +55,7 @@ def plot_disc_method_color(start_year, end_year):
     """
 
     plt.figure(figsize=(15, 8))
+    plt.xticks(np.arange(1992, 2024, 1), rotation=45)
     colors = ["r", "b", "g", "darkorchid", "c", "lime", "fuchsia"]
 
     limit_planet_year_dict = {}
@@ -85,9 +88,7 @@ def plot_disc_method_color(start_year, end_year):
     plt.show()
 
 
-def plot_disc_year_vs_period(
-    start_year=1992, end_year=2024, min_orb_period=0, max_orb_period=8000
-):
+def plot_disc_year_vs_period(start_year=1992, end_year=2024):
     """
     Creates a scatter plot of exoplanet orbital period vs their discovery
     years
@@ -101,11 +102,18 @@ def plot_disc_year_vs_period(
         min_orb_period: integer representing the start period on the y-axis
         max_orb_period: integer representing the end period on the y-axis
     """
-    plt.figure()
-    plt.scatter(planet_panda["discovery_year"], planet_panda["period"])
+    limit_planet_panda = planet_panda[
+        (planet_panda["discovery_year"] >= start_year)
+        & (planet_panda["discovery_year"] <= end_year)
+        & (planet_panda["period"] < 50000)
+    ]
+
+    plt.figure(figsize=(15, 8))
+    plt.xticks(np.arange(1992, 2024, 1), rotation=45)
+    plt.scatter(
+        limit_planet_panda["discovery_year"], limit_planet_panda["period"], s=10
+    )
     plt.title("Exoplanet Orbital Period vs. Discovery Year")
     plt.xlabel("Discovery Year")
     plt.ylabel("Orbital Period")
-    plt.xlim(start_year, end_year)
-    plt.ylim(min_orb_period, max_orb_period)
     plt.show()
