@@ -56,7 +56,7 @@ def plot_disc_method_color(start_year=1992, end_year=2024):
 
     plt.figure(figsize=(15, 8))
     plt.xticks(np.arange(1992, 2024, 1), rotation=45)
-    colors = ["r", "b", "g", "darkorchid", "c", "lime", "fuchsia"]
+    colors = ["r", "b", "g", "y", "c", "k", "fuchsia"]
 
     limit_planet_year_dict = {}
     limit_planet_distance_dict = {}
