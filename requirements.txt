@@ -1,7 +1,3 @@
-`pandas` library
-`xml` package
-`urllib.requests` library
-`gzip` module
-`io` module
-`matplotlib` library
-`numpy` library
+matplotlib~=3.7.2
+numpy~=1.24.3
+pandas~=2.0.3
