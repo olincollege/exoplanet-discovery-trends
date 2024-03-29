@@ -1,0 +1,102 @@
+---
+title: Exoplanet Discovery Trends
+jupyter: python3
+---
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+Authors: Paulo Hitopoulos, Isabelle Rodriguez, Kaif Bailey
+
+## Introduction
+The search for exoplanets, planets beyond our Solar System, began in 1992 with the discovery of two terrestrial-mass planets orbiting a pulsar called PSR B1257+12. Since then, the number of confirmed exoplanet discoveries has grown to well over 5000, with additional discoveries continuously occurring.<br><br>There have been countless technological advancements in the field of astronomy over the years. Have these advancements impacted exoplanet discovery? And if so, to what extent? We seek the answers to these questions by analyzing how the passage of time has influenced the rate of exoplanet discovery, the distance of discovered exoplanets from Earth, the methods used to discover exoplanets, and the orbital periods of discovered exoplanets. Our findings reveal how one of astronomy's most important quests has unfolded over the past three decades.
+
+## Methodology
+
+Our data was obtained from the Open Exoplanet Catalogue repository on GitHub using the `urllib.request`, `gzip`, and `xml.etree.ElementTree` modules. It was then processed using the `xml.etree.ElementTree` module and stored into either a dictionary or a pandas dataframe. We later used the `matplotlib` library (specifically pyplot) to visualize and plot the data.
+
+We looked at information on exoplanet names, distance from Earth (parsecs), orbital period (days), discovery method, and discovery year. We plotted the discovery year against the other characteristics to find trends in exoplanet discovery over time.
+
+
+## Results
+### Rate of Exoplanet Discovery
+
+To see how the rate of exoplanet discoveries has changed with time, the code cell below plots a bar chart showing how many exoplanets were discovered in each year from 1992 and 2024. The start and end year values can be adjusted in order to examine the exoplanet discoveries of a shorter time period more closely.
+
+```{python}
+from exoplanet_visualization import plot_disc_year_bars
+
+# plot_disc_year_bars(start_year, end_year)
+plot_disc_year_bars()
+```
+
+From this plot, we can see that the number of discovered exoplanets each year rose steadily from 1992 to 2024 as technology advanced within the field of astronomy.<br><br>However, there are two irregularities in 2014 and 2016 in which the number of exoplanet discoveries see a dramatic increase and then return to the normal trend. We took a closer look at these spikes and realized that most of the discoveries made in these two years could be tied to a single space telescope: Kepler. The Kepler space telescope alone was responsible for the discovery of 715 exoplanets in 2014 and 1284 exoplanets in 2016. This makes sense, as NASA calls Kepler its "first planet-hunting mission", launched in 2009 to search a portion of the Milky Way Galaxy for exoplanets. As we can see, it was incredibly successful, discovering about half of all the exoplanets that we know of today.<br><br>
+![image.png](attachment:image.png)<br>
+https://science.nasa.gov/mission/kepler/
+
+### Distance and Discovery Methods
+
+Since 1992, astronomers have used seven main methods to discover exoplanets.<br><br>**Radial Velocity (RV):** This method relies on the slight movements, or wobble, of a star as an orbiting exoplanet exerts a small gravitational influence on it, altering its normal light spectrum as seen from Earth.
+
+![image.png](attachment:image.png)<br>https://en.wikipedia.org/wiki/Radial_velocity
+<br><br>**Direct Imaging:** Since exoplanets are often small and dim and can be easily lost in the brilliant glare of the stars they orbit, this method uses the infrared waves emitted by the planet's intrinsic heat to directly observe it.<br><br>**Transit:** This method detects exoplanets using transits, which occur when a planet passes between a star and its observer, slightly dimming the light of the star as seen from Earth.
+
+![image-2.png](attachment:image-2.png)<br>https://www.esa.int/Science_Exploration/Space_Science/How_to_find_an_extrasolar_planet
+<br><br>**Pulsar Timing:** A pulsar is a rapidly rotating star remnant that emits intense electromagnetic radiation detected on Earth as regular and precisely timed pulses. Slight variations in the timing of these pulses indicate to astronomers that the pulsar is orbiting the center of mass of a system with one or more exoplanets.<br><br>**Astrometry:** This method involves precisely measuring a star's location in the sky and detecting minute irregular shifts in its position caused by an orbiting exoplanet.<br><br>**Disk Kinematics:** This method detects the gaps produced by exoplanets in a protoplanetary disk, a rotating disk of dense gas and dust surrounding a young newly formed star.<br><br>**Gravitational Microlensing:** This method detects the warping of the fabric of space-time caused by the mass of an exoplanet, which acts as a lens that bends and magnifies the light from the star it is orbiting.
+
+![image-3.png](attachment:image-3.png)<br>https://www.britannica.com/science/gravitational-microlensing
+<br><br>The code cell below creates a scatter plot showing the distance from Earth of discovered exoplanets over time from 1992-2024. Each dot represents an exoplanet and is color-coded based on the method used to discover it. As with the first plot, the start and end years can be adjusted to focus in on a particular time period. 
+
+```{python}
+from exoplanet_visualization import plot_disc_method_color
+
+# plot_disc_method_color(start_year, end_year)
+plot_disc_method_color()
+```
+
+This plot reveals valuable insight into the most successful methods used to discover exoplanets and how these have changed over time. Radial velocity (red) was evidently one of the first reliable methods used, as the graph shows that it was responsible for almost all of the discoveries within the first eleven years. As we move along the x-axis and get closer to the present, we notice the emergence of many other methods used with varying levels of success. The most successful method of the last two decades appears to be the transit method (dark green) followed by gravitational microlensing (pink), both of which dominated exoplanet discoveries from 2004 onward.
+
+Additionally, the plot clearly shows that as time progresses, astronomers have been able to discover exoplanets at increasingly greater distances. Furthermore, we get an idea of the relative distances at which each discovery method is most successful:
+
+**Small Distances-** Radial Velocity, Direct Imaging, Astrometry, Disk Kinematics<br>
+**Middle Distances-** Transit, Pulsar Timing<br>
+**Large Distances-** Gravitational Microlensing
+
+NASA's Nancy Grace Roman Space Telescope, set to launch in 2027, will use the transit and microlensing methods to discover even more exoplanets.
+
+![image.png](attachment:image.png)<br>https://www.caltech.edu/about/news/data_from_roman_space_telescope
+
+
+### Orbital Period
+
+The orbital period of an exoplanet is the amount of time it takes to complete one orbit around its star. Exoplanets with longer orbital periods are more difficult to discover for astronomers because they pass in front of their stars less often than those with shorter orbital periods.
+
+The following scatter plot shows the orbital period in days of the exoplanets discovered each year from 1992-2024. The start and end years of this plot can also be adjusted. 
+
+```{python}
+from exoplanet_visualization import plot_disc_year_vs_period
+
+# plot_disc_year_vs_period(start_year, end_year)
+plot_disc_year_vs_period()
+```
+
+This plot reveals that as time passes, astronomers have been able to discover more and more exoplanets with relatively long orbital periods. Therefore, even though exoplanets with longer orbital periods are harder to detect, astronomers are gradually getting better at overcoming this challenge.
+
+## Conclusion
+
+All of the insights gathered from our analysis of exoplanet discovery data show that this field has been expanding at a rapid pace and shows no signs of slowing down. Astronomers are discovering more and more exoplanets with each year that passes, occasionally launching missions like the Kepler Space Telescope and the future Roman Space Telescope that cause the number of discoveries to skyrocket. Starting out with mainly the radial velocity method, they have come up with many more powerful and innovative ways to find exoplanets that excel at various distances, including the extremely successful transit and gravitational microlensing methods of recent times. Finally, astronomers are improving at detecting exoplanets with longer orbital periods, showing that they are making steady progress in overcoming common obstacles to exoplanet discovery.
+
+The secondary data used in this analysis was ethically sourced from the Open Exoplanet Catalogue, an open source database of all discovered exoplanets. It did not involve accessing personal or confidential information that would have consequences for any individual, group or organization.
+
+As we contemplated the implications of our findings, the following questions came up: 
+1) How much longer will space exploration continue to advance before we reach the limit of discovery? 
+2) How many of the exoplanets that we have discovered so far can theoretically support extraterrestrial life?
+3) Is it worthwhile to pour so many resources into space exploration, or should we allocate some of them toward more pressing issues?
+
+The most challenging parts of the project included figuring out how to use the ElementTree XML API to successfully generate our data, designing appropriate unit tests for our functions, and narrowing down our broad interest in astronomy to a research question that could be answered with data. By overcoming the challenge of designing unit tests, we learned how larger chunks of code can be split up into smaller, testable functions.
+
+If we were to extend this project, we would analyze the potential relationship between exoplanet masses and year of discovery. Since low-mass exoplanets are also harder to detect, we would see if astronomers have been able to discover more low-mass exoplanets as time progresses, which would indicate progress in dealing with this challenge. More generally, we would consider doing a comparative analysis of trends in our solar system and trends in exoplanet systems to see if our model of the solar system could also be applied to exoplanet systems.
+
+
