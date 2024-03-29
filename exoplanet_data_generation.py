@@ -23,31 +23,6 @@ planet_distance_dict = {}
 planet_year_dict = {}
 planet_period_dict = {"name": [], "period": [], "discovery_year": []}
 
-
-# Functions based on existing code
-def get_discovery_year():
-    """
-    Retrieved data on exoplanet discovery years and store it in a dictionary
-
-    Returns:
-        discovery_year_dict
-    """
-    discovery_year_dict = {}
-
-    for system in oec.findall(".//system"):
-        for planet in system.findall(".//planet"):
-            discovery_year = planet.findtext("discoveryyear")
-
-            if discovery_year is not None:
-                discovery_year = int(discovery_year)
-                if discovery_year not in discovery_year_dict:
-                    discovery_year_dict[discovery_year] = 1
-                else:
-                    discovery_year_dict[discovery_year] += 1
-    return discovery_year_dict
-
-
-# Working code; don't change anything below this line
 for system in oec.findall(".//system"):
     distance = system.findtext("distance")
     for planet in system.findall(".//planet"):
